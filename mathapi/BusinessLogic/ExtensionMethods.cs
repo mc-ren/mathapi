@@ -10,8 +10,8 @@ namespace MathApi.BusinessLogic
         public static string CheckForZeros(this IEnumerable<double> numbersToCalculate)
         {
             var numbersToCalculateList = numbersToCalculate.ToList();
-            var messageToReturn = new StringBuilder("Zero records:");
-            for (var nbr = 0; nbr <= numbersToCalculateList.Count; nbr++)
+            var messageToReturn = new StringBuilder("Zero records at index(s):");
+            for (var nbr = 0; nbr < numbersToCalculateList.Count; nbr++)
             {
                 if (numbersToCalculateList[nbr] == 0)
                 {

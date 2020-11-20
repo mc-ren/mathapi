@@ -8,7 +8,6 @@ using MathApi.DataTransfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Newtonsoft.Json;
 using Xunit;
 
 namespace MathApi.Tests
@@ -60,7 +59,7 @@ namespace MathApi.Tests
             var objectResult = (ObjectResult)result.Result;
 
             // assert
-            objectResult.StatusCode.Should().Be(413);
+            objectResult.StatusCode.Should().Be(400);
             // additional asserts to check text...
         }
 
@@ -82,14 +81,6 @@ namespace MathApi.Tests
 
             // assert
             objectResult.StatusCode.Should().Be(500);
-        }
-
-        public string Serialize()
-        {
-            var msg = JsonConvert.SerializeObject(new CalculationRequest
-                {CalculationType = CalculationType.Add, Numbers = new List<double> {1, 2, 3}});
-
-            return msg;
         }
     }
 }

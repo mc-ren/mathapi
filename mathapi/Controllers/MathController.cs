@@ -58,10 +58,10 @@ namespace MathApi.Controllers
         {
             var response = new HttpResponseMessage
             {
-                Content = new StringContent($"The please include at least 2 to {MaxCollectionSize} records to calculate. You sent: {valueCount}.")
+                ReasonPhrase = $"The please include at least 2 to {MaxCollectionSize} records to calculate. You sent: {valueCount}."
             };
 
-            return StatusCode(413, response);
+            return StatusCode(400, response);
         }
     }
 }

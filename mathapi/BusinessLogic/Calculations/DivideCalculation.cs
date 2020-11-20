@@ -21,9 +21,19 @@ namespace MathApi.BusinessLogic.Calculations
                     return new CalculationResult(result, errMessage, CalculationType.Divide);
                 }
 
-                foreach (var number in numbersToCalculateList)
+                var cnt = 0;
+                foreach (var nbr in numbersToCalculateList)
                 {
-                    result /= number;
+                    if (cnt == 0)
+                    {
+                        result = nbr;
+                    }
+                    else
+                    {
+                        result /= nbr;
+                    }
+
+                    cnt++;
                 }
             }
             catch (Exception ex)
