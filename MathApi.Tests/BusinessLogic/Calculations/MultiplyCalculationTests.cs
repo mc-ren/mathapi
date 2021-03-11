@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using MathApi.BusinessLogic.Calculations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Xunit;
 
 namespace MathApi.Tests.BusinessLogic.Calculations
@@ -48,7 +50,96 @@ namespace MathApi.Tests.BusinessLogic.Calculations
         [Fact]
         public void Fail()
         {
-            // todo figure out fail scenario
+            var arr = new int[] { 64, 25, 12, 22, 11 };
+            int n = arr.Length;
+            // SELECTION SORT
+            for (int i = 0; i < n - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (arr[j] < arr[minIndex]) { minIndex = j; }
+                }
+                // Swap the found minimum element with the first 
+                int temp = arr[minIndex];
+                arr[minIndex] = arr[i];
+                arr[i] = temp;
+            }
+
+            for (var j = 0; j < arr.Length; j++)
+            {
+                System.Console.WriteLine(arr[j]);
+            }
+
+            BinarySearch(arr, 12).Should().BeTrue();
+        }
+
+        [Fact]
+        public void QuickSortTest()
+        {
+            var arr = new int[] { 64, 25, 12, 77, 99}.ToList();
+            QuickSort(arr);
+            
+        }
+
+        public static bool BinarySearch(int[] arry, int nbrToFind)
+        {
+            var low = 0;
+            var high = arry.Length - 1;
+            while (low <= high)
+            {
+                var mid = low + high / 2;
+                var guess = arry[mid];
+                if (guess == nbrToFind) { return true; }
+                if (guess > nbrToFind)
+                { high = mid - 1; }
+                else
+                { low = mid + 1; }
+            }
+            return false;
+        }
+
+        public static void QuickSort(List<int> array)
+        {
+            // base case
+            if (array.Count < 2)
+            {
+                return ;
+            }
+            else
+            {
+                var pivot = array[0];
+                var less = new List<int>();
+                var more = new List<int>();
+                foreach (var i in array)
+                {
+                    if (i <= pivot)
+                    {
+                        less.Add(i);
+                    }
+                    else
+                    {
+                        more.Add(i);
+                    }
+                }
+                QuickSort(less);
+                QuickSort(more);
+
+                less.Add(pivot);
+                less.AddRange(more);
+                array = less;
+                //QuickSort(less);
+                //QuickSort(more);
+                //var returnArry = new List<int>();
+                //returnArry.AddRange(less);
+                //returnArry.Add(pivot);
+                //returnArry.AddRange(more);
+            }
+        }
+
+        public static void QSort(List<int> arry)
+        {
+
         }
     }
 }
